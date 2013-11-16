@@ -1,0 +1,148 @@
+/*STRUCTURE*/
+.container {
+	clear: both;
+	margin: auto;
+	width: 866px;
+	height:auto!important
+}
+
+header {
+	border-bottom: 10px solid #294577;
+}
+body,
+select,
+input,
+a {
+	color:#294577;
+	font-family: verdana;
+}
+#main {
+	position: relative;
+	padding-top: 50px;
+	padding-right: 0;
+	padding-bottom: 20px;
+	padding-left: 0;
+	height:auto!important
+
+}
+/*GENERIC*/
+p {
+	margin: 0 0 10px;
+}
+
+/*FONT SIZE*/
+body,
+header {
+	line-height: 1.2em;
+}
+header h1 {
+	font-size: 12px;
+}
+header h2 {
+	font-size: 11px;
+}
+header {
+	font-size: 9px;
+}
+#signupform {
+	font-size: 18px;
+}
+#signupform strong {
+	font-size: 26px;
+}
+
+/*HEADER*/
+header {
+	padding: 20px 0 10px;
+}
+.img, 
+.autoeco {
+	float: left;
+}
+.autoeco {
+	margin: 10px 0 0 60px;
+}
+
+/*FORM*/
+form.cmxform {
+	float: right;
+	font-size: 18px;
+	text-align: right;
+}
+form.cmxform h1 {
+	font-size: 24px;
+	margin-bottom: 40px;
+}
+form.cmxform p {
+	margin: 0 0 10px;
+}
+form.cmxform input {
+	border: 1px solid #294577;
+	padding: 3px;
+	margin: 0 0 0 10px;
+}
+form.cmxform input.submit {
+	background: #294577;
+	color: white;
+	cursor: pointer;
+	font-size: 28px;
+	font-weight: bold;
+	margin: 10px 270px 0 0;
+}
+
+/*TEXT SIGNUP*/
+#signupform {
+	position: absolute;
+	left: 0;
+	font-weight: bold;
+	line-height: 1.5em;
+	top: 170px;
+	width: 400px;
+}
+
+
+/*COMMENTS*/
+#commentForm { width: 500px; }
+#commentForm label { width: 250px; }
+#commentForm label.error, #commentForm input.submit { margin-left: 253px; }
+#signupForm { width: 670px; }
+#signupForm label.error {
+	margin-left: 10px;
+	width: auto;
+	display: inline;
+}
+#newsletter_topics label.error {
+	display: none;
+	margin-left: 103px;
+}
+
+/*NAV & MENU & ICONS*/
+nav.pages {
+	font-size: 12px;
+	font-style: italic;
+	margin: 0 0 20px;
+}
+.warning, 
+.ok {
+	padding: 0 0 0 36px;
+	min-height: 30px;
+	line-height: 30px;
+	font-weight: bold;
+	margin-bottom: 10px;
+	}
+.ok {
+	background: transparent url('img/icon-ok.png') no-repeat 0 0;
+	color: #00a000;
+}
+.warning {
+	background: transparent url('img/icon-warning.png') no-repeat 0 0;
+	color: #c71807;
+}
+
+/*THANKS*/
+.datasent {
+	padding: 10px 0 10px 40px;
+}
+.datasent h1 {
+	margin-bottom: 10px;
+}
