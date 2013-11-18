@@ -20,9 +20,32 @@ if (verificar_usuario()){
 		<p>Actualiza sus puntos </p>
 		<br/>
         
-        <?php dibuja_tabla('signup', 'D', 'Afiliado, Empresa, Contacto, Poblacion, Puntos, Puntos2', 
+        <?php /*dibuja_tabla('signup', 'D', 'Afiliado, Empresa, Contacto, Poblacion, Puntos, Puntos2', 
         								  'Afiliado, Empresa, Contacto, Poblacion, Puntos, Canjeados',
-        								  'H,V,V,V,E,V'); ?>
+        								  'H,V,V,V,E,V'); */ ?>
+		<div class="demo-info" style="margin-bottom:10px">
+			<div class="demo-tip icon-tip">&nbsp;</div>
+			<div>Haz Doble click en un registro para editar.</div>
+			</div>
+			
+			<table id="dg" title="Lista de talleres de tu zona" style="width:620px;height:350px"
+			toolbar="#toolbar" pagination="false" idField="Afiliado"
+			rownumbers="false" fitColumns="true" singleSelect="true">
+			<thead>
+			<tr>
+				<th field="Afiliado" hidden="true" width="30" sortable="true">Afiliado</th>
+				<th field="Empresa" width="30" sortable="true">Empresa</th>
+				<th field="Contacto" width="20" sortable="true">Contacto</th>
+				<th field="Puntos" width="15" align="right" sortable="true" editor="{type:'validatebox',options:{required:true}}">Puntos</th>
+				<th field="Modificado" width="20" sortable="true">Última Actualización</th>
+			</tr>
+			</thead>
+			</table>
+			<div id="toolbar">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#dg').edatagrid('saveRow')">Guardar</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#dg').edatagrid('cancelRow')">Cancelar</a>
+		</div>
+
         
        <br />
     </div>

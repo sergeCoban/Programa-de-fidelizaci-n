@@ -46,7 +46,8 @@ $modificado = date("d/m/y H:i:s");
 			    . "Telefono ='" . mysql_real_escape_string($phone) . "', "
 			    . "Empleados ='" . mysql_real_escape_string($employees) . "', "
 				. "Modificado ='" . mysql_real_escape_string($modificado) . "', "
-			    . "Red ='" . mysql_real_escape_string($network) . "' ";
+			    . "Red ='" . mysql_real_escape_string($network) . "', "
+			    . "modificado = sysdate()";
 			    
 	if( $password && strlen($password) > 0 ) {
 			  $sql .= ", Password ='" . mysql_real_escape_string($password) . "' ";
