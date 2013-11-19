@@ -47,6 +47,7 @@ if (verificar_usuario()){
 														editable:false, 
 														selectOnNavigation:true, 
 														required:true}}">Tipo</th>
+														
 				<th field="Red" width="30" align="right" formatter="formatRed"
 										   editor="{type:'combobox',options:{
 																	valueField:'id', 
@@ -57,7 +58,7 @@ if (verificar_usuario()){
 																	selectOnNavigation:true}}">Red</th>
 				<th field="Puntos" width="15" align="right" editor="{type:'numberbox',options:{required:true}}">Puntos</th>
 				<th field="Puntos2" width="15" align="right" editor="{type:'numberbox',options:{required:true}}">Puntos Canjeados</th>
-				<th field="Modificado_fmt" width="20" sortable="true">Última Actualización</th>
+				<th field="Modificado" width="20" sortable="true" formatter="formatDate">Última Actualización</th>
 			</tr>
 			</thead>
 			</table>
@@ -76,7 +77,9 @@ if (verificar_usuario()){
       </div>
     </div>
 
-<script>
+<script type="text/javascript">
+
+
 
 function formatTipo(value,row,index) {
 		 switch(value) {
@@ -91,14 +94,27 @@ function formatRed(value,row,index) {
 	return row.Red_empresa;
 }
 
+function formatDate(value,row,index) {
+	var mydate = new Date(value);
+	return mydate.toLocaleDateString("es-ES")
+}
+
 $(function(){
+
+	$('#dg').edatagrid({
+				url: 'get_users.php',
+				saveUrl: 'save_user.php',
+				updateUrl: 'update_user.php',
+				destroyUrl: 'destroy_user.php'
+			});
+
 	$('#dg').edatagrid({
 		onBeforeSave: function(index){
 			var ed = $('#dg').edatagrid('getEditor', {
 				index: index,
 				field: 'Red'
 			});
-			console.log(index + ',' + $(ed.target).combobox('getText'))
+			//console.log(index + ',' + $(ed.target).combobox('getText'))
 			var row = $(this).edatagrid('getRows')[index];
 			row.Red_empresa = $(ed.target).combobox('getText');
 		}

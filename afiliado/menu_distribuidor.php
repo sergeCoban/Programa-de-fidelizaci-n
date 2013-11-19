@@ -37,7 +37,7 @@ if (verificar_usuario()){
 				<th field="Empresa" width="30" sortable="true">Empresa</th>
 				<th field="Contacto" width="20" sortable="true">Contacto</th>
 				<th field="Puntos" width="15" align="right" sortable="true" editor="{type:'numberbox',options:{required:true}}">Puntos</th>
-				<th field="Modificado_fmt" width="20" sortable="true">Última Actualización</th>
+				<th field="Modificado" width="20" sortable="true" formatter="formatDate">Última Actualización</th>
 			</tr>
 			</thead>
 			</table>
@@ -59,12 +59,17 @@ if (verificar_usuario()){
 </div>
 
 <script type="text/javascript">
-		$(function(){
-			$('#dg').edatagrid({
-				url: 'get_users.php',
-				updateUrl: 'update_user.php',
-			});
-		});
+$(function(){
+	$('#dg').edatagrid({
+		url: 'get_users.php',
+		updateUrl: 'update_user.php',
+	});
+});
+
+function formatDate(value,row,index) {
+	var mydate = new Date(value);
+	return mydate.toLocaleDateString("es-ES")
+}
 </script>
 
 <?php

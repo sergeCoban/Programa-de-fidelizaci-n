@@ -13,7 +13,7 @@ $offset = ($page-1)*$rows;
 
 $db = db_connect();
 
-$rs = mysql_query("select s.Afiliado, s.Empresa, s.Tipo, s.Contacto, s.Puntos, s.Puntos2, s.Red, s2.Empresa as Red_empresa, s.Comercial, DATE_FORMAT(s.Modificado,'%d/%m/%Y') AS Modificado_fmt 
+$rs = mysql_query("select s.Afiliado, s.Empresa, s.Tipo, s.Contacto, s.Puntos, s.Puntos2, s.Red, s2.Empresa as Red_empresa, s.Comercial, s.Modificado 
 from signup as s left join signup as s2 on (s2.Afiliado = s.Red) order by s.$sort $order limit $offset,$rows",$db);
 
 //$result["total"] = mysql_num_rows($rs);
