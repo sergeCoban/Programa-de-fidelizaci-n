@@ -22,27 +22,46 @@ if (verificar_usuario()){
         <?php /*dibuja_tabla('signup', 'S', 'Afiliado, Empresa, Contacto, Poblacion, Tipo, Red, Puntos, Puntos2, Fechaalta, Modificado', 
         								  'Afiliado, Empresa, Contacto, Población, Tipo, Red, Puntos Acumulados, Canjeados, Alta, Modificado',
         								  'H,V,V,V,V,V,E,E,V,V'); */?>
-        
+  
+      
         <div class="demo-info" style="margin-bottom:10px">
 			<div class="demo-tip icon-tip">&nbsp;</div>
 			<div>Haz Doble click en un registro para editar.</div>
 			</div>
 			
-			<table id="dg" title="Lista de talleres de tu zona" style="width:620px;height:350px"
-			toolbar="#toolbar" pagination="true" idField="Afiliado"
-			rownumbers="false" fitColumns="true" singleSelect="true">
+			<table id="dg" title="Lista de talleres de tu zona" style="width:820px;height:350px"
+			toolbar="#toolbar" pagination="false" idField="Afiliado"
+			rownumbers="false" fitColumns="true" singleSelect="true" striped=true>
 			<thead>
 			<tr>
-				<th field="Afiliado" width="30" sortable="true">Afiliado</th>
+				<th field="Afiliado" hidden="true" width="30" sortable="true">Afiliado</th>
 				<th field="Empresa" width="30" sortable="true">Empresa</th>
-				<th field="Contacto" width="20">Contacto</th>
-				<th field="Puntos" width="15" editor="{type:'validatebox',options:{required:true}}">Puntos Canjeados</th>
-				<th field="Modificado" width="20">Última Actualización</th>
+				<th field="Contacto" width="20" sortable="true">Contacto</th>
+				<th field="Tipo" width="15" align="right" formatter="formatTipo"
+											editor="{type:'combobox',
+													 options:{
+														valueField:'Tipo', 
+														textField:'nombre', 
+														data:[{Tipo: 'T', nombre: 'Taller'},{Tipo: 'D', nombre:'Distribuidor'},{Tipo: 'S', nombre: 'Super Usuario'}], 
+														panelHeight:68, 
+														editable:false, 
+														selectOnNavigation:true, 
+														required:true}}">Tipo</th>
+				<th field="Red" width="30" align="right" formatter="formatRed"
+										   editor="{type:'combobox',options:{
+																	valueField:'id', 
+																	textField:'name', 
+																	url:'get_distribuidor.php', 
+																	panelWidth:200, 
+																	editable:false, 
+																	selectOnNavigation:true}}">Red</th>
+				<th field="Puntos" width="15" align="right" editor="{type:'numberbox',options:{required:true}}">Puntos</th>
+				<th field="Puntos2" width="15" align="right" editor="{type:'numberbox',options:{required:true}}">Puntos Canjeados</th>
+				<th field="Modificado_fmt" width="20" sortable="true">Última Actualización</th>
 			</tr>
 			</thead>
 			</table>
 			<div id="toolbar">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:$('#dg').edatagrid('addRow')">Crear</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#dg').edatagrid('destroyRow')">Suprimir</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#dg').edatagrid('saveRow')">Guardar</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#dg').edatagrid('cancelRow')">Cancelar</a>
@@ -53,10 +72,41 @@ if (verificar_usuario()){
 			<div id=centrado_azul><a href='afiliado_actualizar.php'>Descargar cátalogo<br>
 		    de regalos: </a></div>
 			<div id=centrado_azul><a href='afiliado_actualizar.php'>Actualice sus datos</a></div>
-			<p><a href='../salir.php'>Desconectarse </a><br/></p>
+			<div id=centrado_azul><a href='../salir.php'>Desconectarse </a><br/></div>
       </div>
     </div>
-       
+
+<script>
+
+function formatTipo(value,row,index) {
+		 switch(value) {
+			 case 'T': return "Taller";
+			 case 'D': return "Distribuidor";
+			 case 'S': return "Super Usuario";
+			 default: return value;
+		 }
+}
+
+function formatRed(value,row,index) {
+	return row.Red_empresa;
+}
+
+$(function(){
+	$('#dg').edatagrid({
+		onBeforeSave: function(index){
+			var ed = $('#dg').edatagrid('getEditor', {
+				index: index,
+				field: 'Red'
+			});
+			console.log(index + ',' + $(ed.target).combobox('getText'))
+			var row = $(this).edatagrid('getRows')[index];
+			row.Red_empresa = $(ed.target).combobox('getText');
+		}
+	});
+});
+
+
+</script>
 <?php
 } else {
 	//si el usuario no es verificado volvera al formulario de ingreso

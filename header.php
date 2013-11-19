@@ -37,15 +37,6 @@
 	<script type="text/javascript" src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="http://www.jeasyui.com/easyui/jquery.edatagrid.js"></script>
 
-	<script type="text/javascript">
-		$(function(){
-			$('#dg').edatagrid({
-				url: 'get_users.php',
-				saveUrl: 'save_user.php',
-				updateUrl: 'update_user.php',
-				destroyUrl: 'destroy_user.php'
-			});
-		});
 </script>
 
 
