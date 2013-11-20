@@ -48,7 +48,7 @@ if (verificar_usuario()){
 														selectOnNavigation:true, 
 														required:true}}">Tipo</th>
 														
-				<th field="Red" width="30" align="right" formatter="formatRed"
+				<th field="Red" width="30" formatter="formatRed"
 										   editor="{type:'combobox',options:{
 																	valueField:'id', 
 																	textField:'name', 
@@ -56,6 +56,7 @@ if (verificar_usuario()){
 																	panelWidth:200, 
 																	editable:false, 
 																	selectOnNavigation:true}}">Red</th>
+				<th field="Puntos_Disponibles" width="20" align="right"}">Ptos Disponibles</th>
 				<th field="Puntos" width="15" align="right" editor="{type:'numberbox',options:{required:true}}">Puntos</th>
 				<th field="Puntos2" width="15" align="right" editor="{type:'numberbox',options:{required:true}}">Puntos Canjeados</th>
 				<th field="Modificado" width="20" sortable="true" formatter="formatDate">Última Actualización</th>

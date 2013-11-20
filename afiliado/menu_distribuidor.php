@@ -36,6 +36,8 @@ if (verificar_usuario()){
 				<th field="Afiliado" hidden="true" width="30" sortable="true">Afiliado</th>
 				<th field="Empresa" width="30" sortable="true">Empresa</th>
 				<th field="Contacto" width="20" sortable="true">Contacto</th>
+				<th field="Comercial" width="20" sortable="true" editor="{type:'text'}">Comercial</th>
+				<th field="Puntos_Disponibles" width="20" align="right">Ptos Dispo.</th>
 				<th field="Puntos" width="15" align="right" sortable="true" editor="{type:'numberbox',options:{required:true}}">Puntos</th>
 				<th field="Modificado" width="20" sortable="true" formatter="formatDate">Última Actualización</th>
 			</tr>
