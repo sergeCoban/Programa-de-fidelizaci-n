@@ -1,10 +1,25 @@
 <?php
 
-$id = intval($_REQUEST['id']);
+include_once '../funciones.php';
+//if (!verificar_usuario()) die();
 
-include 'conn.php';
+$db = db_connect();
 
-$sql = "delete from users where id=$id";
-@mysql_query($sql);
-echo json_encode(array('success'=>true));
+$usuario =$_REQUEST['Afiliado'];
+
+$sql = "delete from signup where Afiliado=$usuario ";
+
+
+if( mysql_query($sql, $db) )
+{
+	echo json_encode(array(
+		'success' => true,
+		));
+} else {
+	echo json_encode(array(
+		'success' => false,
+		'error' => "Error: ".mysql_error()
+		));
+}
+
 ?>

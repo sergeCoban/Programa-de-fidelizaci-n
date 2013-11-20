@@ -30,7 +30,7 @@ if( mysql_query($sql, $db) )
 } else {
 	echo json_encode(array(
 		'Afiliado' => $sql,
-		'Puntos' => "Error: ".mysql_error()
+		'error' => "Error: ".mysql_error()
 		));
 }
 ?>

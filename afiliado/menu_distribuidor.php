@@ -41,10 +41,7 @@ if (verificar_usuario()){
 			</tr>
 			</thead>
 			</table>
-			<div id="toolbar">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#dg').edatagrid('saveRow')">Guardar</a>
-			<a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#dg').edatagrid('cancelRow')">Cancelar</a>
-		</div>
+			<div id="toolbar"></div>
         
        <br />
     </div>
@@ -60,15 +57,96 @@ if (verificar_usuario()){
 
 <script type="text/javascript">
 $(function(){
-	$('#dg').edatagrid({
-		url: 'get_users.php',
-		updateUrl: 'update_user.php',
-	});
+	
+		$('#dg').edatagrid({
+				url: 'get_users.php',
+				toolbar : [ 
+		            {
+	                text : "Editar",
+	                iconCls : "icon-edit",
+	                id : "btn-edit",
+	                handler : function() {
+	                    var row = $('#dg').edatagrid('getSelected');
+	                    if (row) {
+	                        var rowIndex = $('#dg').edatagrid('getRowIndex', row);
+	                        $('#dg').edatagrid('beginEdit', rowIndex);
+	                    }
+	                }
+		            }, {
+	                text : "Cancelar",
+	                id : "btn-cancel",
+	                iconCls : "icon-cancel",
+	                handler : function() {
+                    				endEdit();
+                    				$('#dg').datagrid('rejectChanges');
+                    			}
+	                }, {
+	                text : "Guardar",
+	                id : "btn-save",
+	                iconCls : "icon-save",
+	                handler : function() {
+	                    endEdit();
+	                    if ($('#dg').edatagrid('getChanges').length) {
+	                        var inserted = $('#dg').edatagrid('getChanges', "inserted");
+	                        var deleted = $('#dg').edatagrid('getChanges', "deleted");
+	                        var updated = $('#dg').edatagrid('getChanges', "updated");
+	                        
+	                        if (deleted.length) {
+		                        for( var i in deleted){
+			                        console.log('deleted:'+deleted[i].Empresa);
+			                        
+			                        $.post("destroy_user.php", deleted[i], function (data, textStatus, jqXHR) {
+			                        											if( textStatus != 'success') {
+					                        											var myarray=$.parseJSON('[' + data + ']');
+					                        											alert(myarray[0].error);
+				                        											}
+			                        											});
+		                        }
+
+	                        }
+	                        if (updated.length) {
+		                        for( var i in updated){
+			                        console.log('updated:'+updated[i].Empresa);
+			                        
+			                        $.post("update_user.php", updated[i], function (data, textStatus, jqXHR) {
+			                        											if( textStatus != 'success') {
+					                        											var myarray=$.parseJSON('[' + data + ']');
+					                        											alert(myarray[0].error);
+				                        											}
+			                        											});
+		                        }
+		                       $('#dg').datagrid('reload');
+	                       // console.log(updated[0].Empresa);
+	                        }
+	                    }
+	                  }
+                   }],
+	             onLoadSuccess : function (data) {
+		             	$('#btn-cancel').hide();
+		             	$('#btn-save').hide();
+		             	var sel = $('#dg').edatagrid('getSelected');
+		             	if( sel != null) $('#dg').edatagrid('clearSelections');
+		             	//$('#dg').edatagrid('unselectrow');
+	             },
+	             onBeforeEdit: function (row,data,changes) {
+		             	$('#btn-cancel').show();
+		             	$('#btn-save').show();
+	             }
+
+    });
+    
+	function endEdit(){
+		var rows = $('#dg').datagrid('getRows');
+		for ( var i = 0; i < rows.length; i++) {
+			$('#dg').datagrid('endEdit', i);
+		}
+	}
+
 });
 
 function formatDate(value,row,index) {
 	var mydate = new Date(value);
-	return mydate.toLocaleDateString("es-ES")
+	return [mydate.getDate(), mydate.getMonth()+1, mydate.getFullYear()].join('/');
 }
 </script>
 
