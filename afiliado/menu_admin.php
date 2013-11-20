@@ -70,6 +70,7 @@ if (verificar_usuario()){
 			<div id=centrado_azul><a href='afiliado_actualizar.php'>Descargar cátalogo<br>
 		    de regalos: </a></div>
 			<div id=centrado_azul><a href='afiliado_actualizar.php'>Actualice sus datos</a></div>
+			<div id=centrado_azul><a href='export2xls.php'>Exportar tabla</a><br/></div>
 			<div id=centrado_azul><a href='../salir.php'>Desconectarse </a><br/></div>
       </div>
     </div>

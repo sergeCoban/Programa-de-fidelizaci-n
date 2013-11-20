@@ -1,5 +1,9 @@
 <?php
-session_start();
+
+session_start();  					// siempre iniciar la sesión antes de generar nada en la pagina !
+$Afiliado = $_SESSION['Afiliado'];	// se recupera el nº de afiliado
+if( !$Afiliado || strlen($Afiliado) == 0) die("<br /><h1>El sistema no lo ha identificado, solo los usuarios registrados tienen acceso a esta area</h1><br /></div></body></html>");
+if( $_SESSION['Tipo'] != 'D' and $_SESSION['Tipo'] != 'S') die("<br /><h1>No esta autorizado a acceder a esta area!</h1><br /></div></body></html>");
 
 include_once '../funciones.php';
 
